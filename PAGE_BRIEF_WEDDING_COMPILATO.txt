@@ -1,0 +1,89 @@
+# PAGE BRIEF
+
+Stato: BOZZA
+
+Leggere prima il SITE_BRIEF. Questo documento contiene esclusivamente obiettivi, struttura, reference ed eccezioni specifiche della pagina.
+
+## 1. Identificazione e ruolo
+
+Pagina:
+Wedding
+
+Percorso / URL previsto:
+/Rank2/wedding.html
+
+Ruolo nel sito:
+Pagina di servizio Wedding. Presenta il servizio fotografico per matrimoni sul Lago Maggiore e sul Lago d’Orta, mostra una galleria fotografica e collega alle due pagine dedicate alle singole destinazioni.
+
+Provenienza probabile dell'utente:
+Coppie che cercano un fotografo di matrimonio sul Lago d’Orta, come indicato nel SITE_BRIEF.
+
+## 2. Obiettivo e azione principale
+
+Obiettivo della pagina:
+Presentare il servizio fotografico per matrimoni, il portfolio associato e le due destinazioni Lago d’Orta e Lago Maggiore. Il copy invita esplicitamente a considerare la scelta del fotografo e descrive attenzione alle emozioni e interpretazione della storia.
+
+Azione principale:
+Aprire una delle due pagine dedicate tramite le CTA “Matrimonio sul Lago d’Orta” (`matrimonio-lago-d-orta.html`) e “Matrimonio sul Lago Maggiore” (`matrimonio-lago-maggiore.html`).
+
+Azioni secondarie, solo se necessarie:
+Aprire le immagini della galleria; usare i contatti globali presenti in pagina: telefono `tel:+393474799390`, email `mailto:info@manuelalovo.it`, indirizzo/mappa e pagina `contatti.html`.
+
+## 3. Variazione rispetto all'identità globale
+
+Compilare solo se la pagina deve avere tono, atmosfera o densità differenti.
+
+Pagina prevalentemente portfolio: dopo l’introduzione bilingue inserisce il blocco dedicato alle due destinazioni e una galleria tiled molto estesa. L’identità è quella globale; il CSS pagina-specifico aggiunge soltanto il contenimento a 820 px dell’introduzione.
+
+## 4. Reference strutturale
+
+File o riferimento:
+[NOME O POSIZIONE]
+
+Prendere:
+
+- [ORDINE DELLE SEZIONI]
+- [RITMO]
+- [ALTERNANZA TESTO / IMMAGINI]
+- [DISTRIBUZIONE DELLA DENSITÀ]
+
+Ignorare:
+
+- [IDENTITÀ GLOBALE]
+- [COLORI]
+- [FONT]
+- [CONTENUTI]
+- [ALTRO]
+
+## 5. Mappa e ritmo della pagina
+
+1. Header e breadcrumb globali — logo, navigazione desktop/mobile e breadcrumb “Home » Wedding”.
+2. Introduzione italiana — H1 “Wedding”, H2 “Fotografa matrimonio wedding Lago Maggiore e Lago d'Orta” e quattro paragrafi sul valore della fotografia e della scelta del fotografo.
+3. Introduzione inglese — H2 “Wedding photographer Lake Maggiore and Lake Orta” e quattro paragrafi equivalenti in inglese.
+4. “Due laghi, due atmosfere” — breve copy e due CTA dirette alle pagine `matrimonio-lago-d-orta.html` e `matrimonio-lago-maggiore.html`.
+5. Galleria Wedding — mosaico tiled legacy composto da 30 righe e 91 elementi immagine, ciascuno collegato al rispettivo file fotografico a dimensione maggiore; seguono i componenti globali contatti, Instagram e footer.
+
+Ritmo generale:
+L’apertura è testuale e a due lingue; il percorso passa al confronto tra destinazioni attraverso due CTA affiancate e si chiude con una lunga galleria a mosaico di immagini orizzontali e verticali, prima dei componenti globali.
+
+## 6. Percorso cromatico e raccordi tra sezioni — opzionale
+
+Definire qui una sola volta le regole distribuite della pagina: transizioni cromatiche, linee o elementi condivisi, continuità dello sfondo e raccordi che attraversano più sezioni.
+
+Il contenuto usa lo sfondo chiaro e la tipografia/gerarchia legacy del sito. Il blocco “Due laghi, due atmosfere” usa le classi `lake-location-links` e `lake-location-link` definite in `css/lake-wedding.css`: titoli e bordi #9e937f, testo #424242, CTA con bordo beige-tortora e stato hover/focus con fondo #9e937f e testo bianco. La galleria prosegue su fondo chiaro con immagini separate da margini di 2 px.
+
+I SECTION_BRIEF indicano soltanto il proprio punto di ingresso, uscita o un'eccezione locale.
+
+## 7. Eccezioni, materiali e vincoli
+
+Compilare soltanto ciò che non è nel SITE_BRIEF.
+
+- File specifici: `Rank2/wedding.html`, `css/wedding.css`; il blocco delle CTA lago dipende anche da `css/lake-wedding.css`, che viene caricato dalla pagina.
+- La galleria usa markup WordPress/Jetpack legacy (`tiled-gallery`) e lazy loading (`data-lazy-src` con fallback `<noscript>`); le immagini sono link cliccabili ai file originali.
+- Sono richiamati `../JS/jquery.js`, `../JS/all.js`, `../JS/api871d.js`, `../JS/autoptimize_fe0df2dce23facaff9a2ed8f27480345.js`, `../JS/iubenda_cs.js` e `../JS/language-switcher.js`. Le funzioni effettive dei bundle minificati non sono isolate nel brief.
+- Desktop: la galleria è composta da righe con larghezze inline calcolate sul valore originale di 1400 px; le CTA lago sono in una lista flex con ritorno a capo.
+- Mobile: il menu responsive è gestito dal JavaScript inline e dagli stili legacy; sotto 780 px il CSS del blocco lago imposta le CTA in colonna, a larghezza piena. La galleria mantiene le proprie righe tiled con immagini lazy-loaded; non emerge una regola pagina-specifica che ne ricomponga la geometria.
+- Quattro riferimenti locali sono non verificabili perché nel markup il carattere apostrofo appare codificato in modo anomalo e non corrisponde ai file presenti: `Sposi-Lago-dâ€™Orta.jpg` e relativa variante `-693x463.jpg`, `Lago-dâ€™Orta-Isala-di-San-Giulio.jpg` e relativa variante `-412x275.jpg`.
+- La mappa e il ritmo descrivono lo stato corrente della pagina Wedding e non sono ancora approvati come struttura target della modifica.
+
+I dettagli locali restano nei SECTION_BRIEF.
