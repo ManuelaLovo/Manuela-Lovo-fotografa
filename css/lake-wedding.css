@@ -259,6 +259,17 @@
   display: none;
 }
 
+.lake-location-photo:has(img) {
+  padding: 0;
+}
+
+.lake-location-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .lake-location-photo span {
   max-width: 360px;
   font-size: 12px;
@@ -342,6 +353,41 @@
   color: inherit;
   font-size: 14px;
   line-height: 1.65;
+}
+
+/* Collegamento alla pagina dedicata della location: resta fuori dal
+   pulsante di selezione (che governa solo la foto), così la selezione e la
+   navigazione da tastiera restano corrette. */
+.lake-location-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  color: #817561;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.lake-location-link span {
+  font-size: 13px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.lake-location-link:hover,
+.lake-location-link:focus-visible {
+  color: #9e937f;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lake-location-link:focus-visible {
+  outline: 2px solid #9e937f;
+  outline-offset: 4px;
 }
 
 .lake-location-section--media-right .lake-location-media {
@@ -565,4 +611,37 @@
     padding-right: 16px;
     padding-left: 16px;
   }
+}
+
+/* Le due gallerie delle pagine dei laghi restano due section separate perche
+   fonderle vorrebbe dire riscrivere a mano 91 immagini. All'occhio pero' devono
+   essere un blocco solo: si toglie il filetto e si azzera lo stacco verticale.
+   Cosi' fra l'ultima riga della prima e la prima riga della seconda resta solo
+   il margin-bottom di 10px che gia' separa le righe dentro ogni galleria.
+   La regola generale .lake-wedding-portfolio non si tocca: vale anche sulle
+   pagine location, dove la galleria e' una sola e lo stacco ci deve stare.
+   Serve :has() perche' meta' della cucitura e' il padding sotto della PRIMA
+   sezione, e in CSS non esiste il selettore del fratello precedente. */
+.lake-wedding-portfolio:has(+ .lake-wedding-portfolio--continued) {
+  padding-bottom: 0;
+}
+
+.lake-wedding-portfolio--continued {
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* La seconda galleria vive dentro i wrapper del page builder di WordPress, che
+   la stringono a 1170px (il max-width della griglia) meno i 15px di padding per
+   lato della cella: 1140px, contro i 1400px della prima. Si neutralizzano quei
+   due vincoli, cosi' le due gallerie arrivano alla stessa larghezza e la
+   cucitura non si vede nemmeno ai lati. Vale solo dove il panel-grid sta dentro
+   una sezione portfolio: le pagine location e wedding.html non lo hanno. */
+.lake-wedding-portfolio #pg-20-2 {
+  max-width: none !important;
+}
+
+.lake-wedding-portfolio #pg-20-2 .panel-grid-cell {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }
