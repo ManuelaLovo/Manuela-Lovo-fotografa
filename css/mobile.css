@@ -1,0 +1,53 @@
+/* Correzioni trasversali per il mobile — caricato da tutte le pagine, subito
+   dopo contact-section.css. Qui sta solo quello che vale su tutto il sito e
+   non ha un foglio proprio: il resto va nel file del suo componente.
+   Breakpoint 991px e 780px: sono quelli che il sito usa già in lake-wedding.css
+   e in contact-section.css, non se ne aggiungono di nuovi. */
+
+/* 991px è la soglia a cui il menu diventa hamburger: da lì in giù vale il
+   layout mobile. */
+@media only screen and (max-width: 991px) {
+  /* Le griglie tiled-gallery portano le larghezze in pixel dentro gli
+     attributi inline, calcolate su una riga da 1395px. Sotto i 991px quella
+     riga non ci sta e l'overflow la taglia: su una pagina location erano 16
+     foto su 18 mostrate a metà. Riscalarle a proporzione le ridurrebbe a
+     francobolli da 170px, quindi si impilano: una foto per riga, a piena
+     larghezza. L'!important qui batte lo stile inline, non una cascata. */
+  .tiled-gallery .gallery-row,
+  .tiled-gallery .gallery-group,
+  .tiled-gallery .tiled-gallery-item,
+  .tiled-gallery .tiled-gallery-item img {
+    width: 100% !important;
+    height: auto !important;
+    float: none !important;
+  }
+
+  /* Il tema mette margin:2px !important sulle immagini della galleria: a
+     piena larghezza sporgerebbero di 2px per lato. */
+  .tiled-gallery .tiled-gallery-item img {
+    margin: 0 0 10px !important;
+  }
+
+  .tiled-gallery .gallery-row {
+    margin-bottom: 0;
+  }
+
+  /* Il footer ha padding-left:60px e dentro un .container da 750px fissi (il
+     valore Bootstrap da 768px in su): 60+750 fa 810 dentro una finestra da
+     753, e la pagina scorre di lato. Sotto i 991px il container va fluido.
+     Il padding del footer resta com'è: è lo stato del sito, non un errore. */
+  .site-footer .site-info.container {
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  /* La colonna social è fissa sul bordo destro: da desktop sta nel margine
+     bianco, sotto i 780px il margine non c'è più e finisce sopra le
+     fotografie e sopra l'elenco delle location. Gli stessi due link stanno
+     nel footer di ogni pagina: nascondendola non si perde nessun
+     collegamento. L'!important batte lo stile inline dell'elemento. */
+  #social-left {
+    display: none !important;
+  }
+}

@@ -46,9 +46,11 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     var currentScript = document.querySelector('script[src$="language-switcher.js"]');
+    var scriptSrc = currentScript ? currentScript.getAttribute('src') : '';
+    var upLevels = (scriptSrc.match(/\.\.\//g) || []).length;
     var stylesheet = document.createElement('link');
     stylesheet.rel = 'stylesheet';
-    stylesheet.href = (currentScript && currentScript.getAttribute('src').indexOf('../') === 0 ? '../' : '') + 'css/language-switcher.css';
+    stylesheet.href = '../'.repeat(upLevels) + 'css/language-switcher.css';
     document.head.appendChild(stylesheet);
     document.documentElement.lang = currentLanguage;
     addSwitcher();

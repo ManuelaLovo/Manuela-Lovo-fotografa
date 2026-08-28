@@ -326,6 +326,41 @@
   visibility: visible;
 }
 
+/* Collegamento alla pagina dedicata della location, sovrapposto allo slot
+   fotografico. Non è dentro il pulsante di selezione: resta un elemento
+   indipendente, così la rotazione delle foto continua a funzionare. */
+.wedding-location-link {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #443f3f;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  text-decoration: none;
+  border-radius: 2px;
+  box-shadow: 0 6px 18px rgba(28, 28, 28, 0.14);
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.wedding-location-link:hover,
+.wedding-location-link:focus-visible {
+  background: #fff;
+  color: #9e937f;
+}
+
+.wedding-location-link:focus-visible {
+  outline: 2px solid #9e937f;
+  outline-offset: 2px;
+}
+
 /* Il blocco approvato "Due laghi, due atmosfere" resta autonomo dalle
    regole condivise delle pagine lago. */
 .wedding-editorial + .lake-location-links {

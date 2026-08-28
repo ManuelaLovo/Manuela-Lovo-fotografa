@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.manuelalovo.it/sitemap.xml
+Sitemap: https://manuelalovo.it/sitemap.xml

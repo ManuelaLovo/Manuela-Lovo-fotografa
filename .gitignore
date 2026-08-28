@@ -1,0 +1,35 @@
+# 27/08/2026 — Nove pagine location escluse dalla pubblicazione.
+#
+# Sono finite e complete, ma non hanno nessuna fotografia: sono di solo testo.
+# Restano qui nella cartella, intere: non sono cancellate, non sono svuotate e
+# non hanno noindex (quel meta serve a togliere dall'indice una pagina che e'
+# online, e nessuna di queste lo e' mai stata).
+# Il collegamento alla pagina e' stato tolto da elenchi, schede e home: il nome
+# della location resta ovunque era, sparisce solo la porta.
+#
+# Togliere la riga quando arrivano le foto di questa location.
+
+Rank2/location/location-castello-dal-pozzo.html
+Rank2/location/location-villa-frua.html
+Rank2/location/location-la-capuccina.html
+Rank2/location/location-hotel-san-rocco.html
+Rank2/location/location-palazzo-ubertini.html
+Rank2/location/location-palazzo-gemelli.html
+Rank2/location/location-villa-crespi.html
+Rank2/location/location-principato-di-lucedio.html
+Rank2/location/location-lago-di-varese.html
+
+en/Rank2/location/location-castello-dal-pozzo.html
+en/Rank2/location/location-villa-frua.html
+en/Rank2/location/location-la-capuccina.html
+en/Rank2/location/location-hotel-san-rocco.html
+en/Rank2/location/location-palazzo-ubertini.html
+en/Rank2/location/location-palazzo-gemelli.html
+en/Rank2/location/location-villa-crespi.html
+en/Rank2/location/location-principato-di-lucedio.html
+en/Rank2/location/location-lago-di-varese.html
+
+# 27/08/2026 - File di lavoro, non vanno sul sito pubblicato.
+.claude/
+.vscode/
+DESIGN-BRIEF.md
