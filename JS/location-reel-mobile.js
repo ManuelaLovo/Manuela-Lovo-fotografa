@@ -1,13 +1,12 @@
-/* Reel della location sul mobile — sotto i 780px il video prende il posto della
-   prima foto del blocco editoriale, subito sotto il primo H2, e la sezione reel
-   di fondo pagina sparisce perché il video non si veda due volte. Sopra i 780px
-   torna tutto dov'era.
+/* Reel della location — il video prende il posto della prima foto del blocco
+   editoriale, subito sotto il primo H2, e la sezione reel di fondo pagina
+   sparisce perché il video non si veda due volte. Vale su mobile e su desktop.
    Il reel sta in una <section> sorella dell'intro: spostarlo dentro al blocco
-   editoriale non si può fare in CSS, serve muovere il nodo. Il blocco editoriale
-   si chiama .location-intro-editorial su due pagine e .lake-editorial-media sulle
-   altre quindici: stessa struttura, classi diverse, quindi si cercano entrambe.
-   Se lo script non parte la pagina resta quella di sempre — foto in alto, reel in fondo — e la
-   classe che nasconde la foto non viene mai messa. */
+   editoriale non si può fare in CSS, serve muovere il nodo. Il blocco si chiama
+   .location-intro-editorial su due pagine e .lake-editorial-media sulle altre
+   quindici: stessa struttura, classi diverse, quindi si cercano entrambe.
+   Se lo script non parte la pagina resta quella di sempre — foto in alto, reel
+   in fondo — e la classe che nasconde la foto non viene mai messa. */
 (function () {
   "use strict";
 
@@ -19,25 +18,6 @@
     return;
   }
 
-  var mobile = window.matchMedia("(max-width: 780px)");
-
-  function apply() {
-    if (mobile.matches) {
-      if (video.parentNode !== figure) {
-        figure.appendChild(video);
-      }
-    } else if (video.parentNode !== reel) {
-      reel.appendChild(video);
-    }
-
-    document.body.classList.toggle("location-reel-moved", mobile.matches);
-  }
-
-  apply();
-
-  if (mobile.addEventListener) {
-    mobile.addEventListener("change", apply);
-  } else {
-    mobile.addListener(apply);
-  }
+  figure.appendChild(video);
+  document.body.classList.add("location-reel-moved");
 }());
