@@ -554,13 +554,34 @@ a.location-nearby-card:focus-visible .location-nearby-icon {
 /* Mobile: sotto il primo H2 prima il testo, poi il media — e dove la pagina ha
    un reel è il video a prendere il posto della foto (lo sposta
    location-reel-mobile.js, che mette .location-reel-moved sul body). 780px è la
-   soglia già usata dal blocco editoriale qui sopra, al contrario. */
+   soglia già usata dal blocco editoriale qui sopra, al contrario, ed è la stessa
+   di lake-wedding.css.
+   Le pagine location portano due blocchi editoriali diversi: .location-intro-editorial
+   su Piccolo Lago e Grand Hotel Dino, .lake-wedding-editorial sulle altre quindici.
+   Sono la stessa cosa scritta con classi diverse, quindi vanno trattati insieme.
+   Questo foglio è caricato dopo lake-wedding.css: le due righe sui grid-row lo
+   battono per ordine, non per specificità. */
 @media only screen and (max-width: 780px) {
   .location-intro-editorial {
     flex-direction: column-reverse;
   }
 
-  .location-reel-moved .location-intro-editorial figure img {
+  .lake-editorial-copy {
+    grid-row: 1;
+  }
+
+  .lake-editorial-media {
+    grid-row: 2;
+  }
+
+  .location-reel-moved .location-intro-editorial figure img,
+  .location-reel-moved .lake-editorial-image {
+    display: none;
+  }
+
+  /* La didascalia descrive la fotografia: se la foto non c'è, non deve restare
+     nemmeno per gli screen reader. */
+  .location-reel-moved .lake-editorial-media figcaption {
     display: none;
   }
 

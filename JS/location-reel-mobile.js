@@ -3,13 +3,15 @@
    di fondo pagina sparisce perché il video non si veda due volte. Sopra i 780px
    torna tutto dov'era.
    Il reel sta in una <section> sorella dell'intro: spostarlo dentro al blocco
-   editoriale non si può fare in CSS, serve muovere il nodo. Se lo script non
-   parte la pagina resta quella di sempre — foto in alto, reel in fondo — e la
+   editoriale non si può fare in CSS, serve muovere il nodo. Il blocco editoriale
+   si chiama .location-intro-editorial su due pagine e .lake-editorial-media sulle
+   altre quindici: stessa struttura, classi diverse, quindi si cercano entrambe.
+   Se lo script non parte la pagina resta quella di sempre — foto in alto, reel in fondo — e la
    classe che nasconde la foto non viene mai messa. */
 (function () {
   "use strict";
 
-  var figure = document.querySelector(".location-intro-editorial figure");
+  var figure = document.querySelector(".location-intro-editorial figure, .lake-editorial-media");
   var reel = document.querySelector(".location-reel");
   var video = reel ? reel.querySelector(".location-reel-video") : null;
 
