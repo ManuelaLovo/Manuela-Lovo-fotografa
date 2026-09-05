@@ -645,3 +645,111 @@
   padding-right: 0 !important;
   padding-left: 0 !important;
 }
+
+/* CTA WhatsApp: sta subito dopo la prima sezione sotto la hero, sulle pagine
+   lago, location e wedding. Lo stacco con i vicini e' dato dal padding del
+   blocco piu' un padding ridotto della sezione che lo precede e di quella che
+   lo segue, solo quando il CTA c'e': altrimenti sarebbe la somma dei due
+   clamp da 56-88px, cioe' il vuoto gia' contestato dalla cliente sulla wedding. */
+.lake-wedding-cta {
+  padding: 20px 20px 28px;
+  text-align: center;
+}
+
+.lake-wedding-cta,
+.lake-wedding-cta * {
+  box-sizing: border-box;
+}
+
+.lake-wedding-cta-link {
+  max-width: 100%;
+  gap: 10px;
+}
+
+.lake-wedding-cta-icon {
+  flex: none;
+  width: 22px;
+  height: 22px;
+}
+
+.lake-wedding-cta-link:focus-visible {
+  outline: 2px solid #9e937f;
+  outline-offset: 4px;
+}
+
+.lake-wedding-editorial:has(+ .lake-wedding-cta),
+.location-intro:has(+ .lake-wedding-cta) {
+  padding-bottom: 24px;
+}
+
+.lake-stories:has(+ .lake-wedding-cta) > .lake-story:last-child {
+  padding-bottom: 24px;
+}
+
+/* Su Grand Hotel Dino e Piccolo Lago il reel sta fra CTA e location vicine, ma
+   location-reel-mobile.js lo sposta e lo nasconde (classe sul body): la
+   vicina reale diventa .location-nearby. */
+.lake-wedding-cta + .location-intro,
+.lake-wedding-cta + .location-reel,
+.lake-wedding-cta + .location-nearby,
+.location-reel-moved .lake-wedding-cta + .location-reel + .location-nearby,
+.lake-wedding-cta + .wedding-locations {
+  padding-top: 20px;
+}
+
+@media only screen and (max-width: 780px) {
+  .lake-wedding-cta {
+    padding: 12px 16px 24px;
+  }
+
+  .lake-wedding-editorial:has(+ .lake-wedding-cta),
+  .location-intro:has(+ .lake-wedding-cta),
+  .lake-stories:has(+ .lake-wedding-cta) > .lake-story:last-child {
+    padding-bottom: 20px;
+  }
+
+  .lake-wedding-cta + .location-intro,
+  .lake-wedding-cta + .location-reel,
+  .lake-wedding-cta + .location-nearby,
+  .location-reel-moved .lake-wedding-cta + .location-reel + .location-nearby,
+  .lake-wedding-cta + .wedding-locations {
+    padding-top: 16px;
+  }
+}
+
+/* Pagine lago — il vuoto attorno a "Storie di matrimonio". A 1280 erano 76px
+   sopra il titolo e 50px sotto, con in mezzo i 22px di padding che reggono il
+   trattino: troppo, per un titolo che sta solo annunciando la galleria.
+   Sopra si scende alla meta' esatta del clamp di sezione; sotto si torna ai
+   30px che .lake-section-title ha gia' di suo, cioe' si toglie di mezzo
+   l'override a 50px del portfolio. Nessun valore inventato.
+   Vale solo sulle due pagine lago: le location portano anche
+   .location-page-shell sul body. La seconda galleria e' esclusa perche' ha
+   padding-top 0 per non far vedere la cucitura, e il padding sotto non si
+   tocca per la stessa ragione. */
+body.lake-wedding-page-shell:not(.location-page-shell) .lake-wedding-portfolio:not(.lake-wedding-portfolio--continued) {
+  padding-top: clamp(26px, 3vw, 38px);
+}
+
+body.lake-wedding-page-shell:not(.location-page-shell) .lake-wedding-portfolio > .lake-section-title {
+  margin-bottom: 30px;
+}
+
+/* Pagine lago — il vuoto prima della fascia grigia. Fra l'ultima card e il
+   titolo del rimando c'erano 216,8px a 1280, impilati in tre pezzi: 76px di
+   padding sotto dell'ultima sezione, 64px di padding sotto del contenitore dei
+   gruppi, e 76,8px di padding sopra della fascia. I 64px del contenitore sono
+   spazio morto: la fascia che segue ha gia' il suo padding, e quel valore
+   serviva quando sotto non c'era niente. Si azzerano solo quando il rimando
+   c'e' davvero, con lo stesso :has(+ ...) usato per il CTA WhatsApp.
+   Il padding sotto dell'ultima sezione scende alla meta' del clamp: le altre
+   due restano intatte, il ritmo fra i gruppi non cambia.
+   Il padding della fascia grigia non si tocca: e' un blocco colorato, quello
+   e' la sua forma, non vuoto. */
+body.lake-wedding-page-shell:not(.location-page-shell) .lake-location-groups:has(+ .lake-wedding-crosslink) {
+  padding-bottom: 0;
+}
+
+body.lake-wedding-page-shell:not(.location-page-shell) .lake-location-groups > .lake-location-section:last-child {
+  padding-bottom: clamp(26px, 3vw, 38px);
+}
