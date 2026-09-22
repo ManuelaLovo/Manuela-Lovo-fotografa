@@ -446,35 +446,112 @@ h2.gb-headline-ca36ea9a + .location-reel {
   max-width: 1400px;
 }
 
-/* lp: navbar nuova, solo per la landing — logo a sinistra (senza link alla
-   home, serve solo a far riconoscere che è Manuela Lovo) e CTA a destra,
-   niente menu. `.site-header` di css/collezione-natale.css (condiviso, non
-   si tocca) lo rende fixed o absolute a seconda di quando lo script tocca
-   la classe "fixed": comportamento non deterministico, ha lasciato un
-   vuoto enorme sopra l'hero in un caricamento su due. Riportato a un
-   blocco normale, in flusso, sempre uguale: position qui vince perché più
-   specifica (due classi) della singola `.site-header` condivisa. */
+/* lp: navbar nuova, solo per la landing — contatti a sinistra, logo al
+   centro (senza link alla home: serve solo a far riconoscere che è Manuela
+   Lovo) e CTA a destra, niente menu. Sotto i 991px i contatti spariscono
+   dalla barra e passano nel panino, che è quello condiviso del sito
+   (#responsive-menu-button + #responsive-menu-container di
+   css/collezione-natale.css, mossi dallo script inline già presente in
+   pagina): nessuno script nuovo.
+   `.site-header` di css/collezione-natale.css (condiviso, non si tocca) lo
+   rende fixed o absolute a seconda di quando lo script tocca la classe
+   "fixed": comportamento non deterministico, ha lasciato un vuoto enorme
+   sopra l'hero in un caricamento su due. Riportato a un blocco normale, in
+   flusso, sempre uguale. Anche height e line-height arrivano da lì (140px
+   e 90px, tarate sull'header del sito che ha i menu) e qui vanno annullate:
+   position qui vince perché più specifica (due classi) della singola
+   `.site-header` condivisa, il padding no e serve !important. */
 #masthead.lp-nav-bar {
   position: static;
+  height: auto;
+  line-height: normal;
+  padding: 14px 20px !important;
 }
 
 .lp-nav-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
   background: #ffffff;
 }
 
+/* lp: stessa flex-basis alle due colonne laterali — è quello che tiene il
+   logo esattamente al centro della barra anche se i contatti sono molto
+   più larghi del CTA. */
+.lp-nav-contacts,
+.lp-nav-bar-action {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.lp-nav-contacts {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+/* lp: gli stessi tre contatti della fascia #contatti a fondo pagina
+   (telefono, email, orari), stesse icone, rimpiccioliti per stare in barra
+   e senza i divisori che lì separano le voci. */
+.lp-nav-contact {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #6f6557;
+  text-decoration: none;
+}
+
+a.lp-nav-contact:hover,
+a.lp-nav-contact:focus {
+  color: #a95401;
+  text-decoration: none;
+}
+
+.lp-nav-contact-icon {
+  flex: 0 0 auto;
+}
+
+.lp-nav-contact-icon svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  color: #9e937f;
+}
+
+.lp-nav-contact-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.lp-nav-contact-title {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: #9e937f;
+}
+
+.lp-nav-contact-value {
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
 .lp-nav-bar-logo {
-  margin-left: 20px;
+  flex: 0 0 auto;
 }
 
 .lp-nav-bar-logo img {
   display: block;
   width: auto;
   height: auto;
-  max-height: 50px;
+  max-height: 64px;
+}
+
+.lp-nav-bar-action {
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* lp: .gb-button-3a2422c5 (le altre "PRENOTA ORA!" in pagina) prende colore
@@ -490,7 +567,6 @@ h2.gb-headline-ca36ea9a + .location-reel {
   align-items: center;
   gap: 8px;
   white-space: nowrap;
-  margin-right: 20px;
   padding: 10px 20px;
   font-size: 13px;
   line-height: normal;
@@ -506,26 +582,61 @@ h2.gb-headline-ca36ea9a + .location-reel {
   opacity: 0.9;
 }
 
-/* lp: sotto i 991px la bandierina lingua (css/language-switcher.css,
-   condiviso) passa in alto a destra, impilata, 68px di colonna — lo stesso
-   posto dove va il CTA. Il CTA le lascia libere. */
+/* lp: la riga degli orari nel panino non è un link, quindi non la prende
+   la regola condivisa `li.responsive-menu-item a`. Stessi valori di quella
+   (riga piena, bordo, taupe, bianco), ma altezza libera invece dei 40px
+   fissi: il testo degli orari su schermo stretto va a capo. */
+#responsive-menu-container #responsive-menu li.lp-menu-item-static .responsive-menu-item-link {
+  display: block;
+  width: 100%;
+  padding: 10px 5%;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: #9e937f;
+  border-bottom: 1px solid #b3ada1;
+}
+/* lp: i tre contatti in riga stanno comodi finché la colonna di sinistra
+   resta sopra i ~510px, cioè da 1260px di finestra in su. Sotto, gli orari
+   escono dalla barra: sono la voce più lunga delle tre ed è quella che si
+   può leggere altrove senza perdere niente (fascia #contatti a fondo
+   pagina, e panino sotto i 991px). Telefono ed email restano sempre. */
+@media (max-width: 1259px) {
+  .lp-nav-contact-orari {
+    display: none;
+  }
+}
+
+/* lp: sotto i 991px entra il panino condiviso: i contatti se ne vanno lì
+   dentro e la barra gli lascia il posto con il padding, restando alta
+   abbastanza da contenerlo. Il bottone condiviso è una scatola da 75px
+   ancorata a 20px dal bordo, e le tre barrette, centrate lì dentro,
+   finivano addosso al logo: qui la scatola è più stretta e più a sinistra,
+   così le barrette cadono sui 20px del margine come il resto della pagina.
+   A destra il CTA arriva fino al margine: su questa pagina il selettore di
+   lingua non c'è, quindi l'angolo in alto a destra è tutto suo. */
 @media (max-width: 991px) {
-  .lp-nav-bar-cta {
-    margin-right: 84px;
+  #masthead.lp-nav-bar {
+    min-height: 90px;
+    padding-left: 95px !important;
+  }
+
+  button#responsive-menu-button {
+    width: 50px;
+    left: 8px !important;
+  }
+
+  .lp-nav-contacts {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
-  .lp-nav-bar-logo {
-    margin-left: 12px;
+  #masthead.lp-nav-bar {
+    padding-left: 80px !important;
   }
 
   .lp-nav-bar-logo img {
     max-height: 38px;
-  }
-
-  .lp-nav-bar-cta {
-    margin-right: 84px;
-    padding: 8px 14px;
   }
 }
