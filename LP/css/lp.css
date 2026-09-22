@@ -145,6 +145,16 @@
   margin-bottom: 24px;
 }
 
+/* lp: stesso motivo di .gb-container-a04d9845 sopra — il genitore
+   .gb-container-f2507519 è flex column con align-items:center, che non stira i
+   figli ma li stringe al loro contenuto e li centra. "Alcuni scatti degli scorsi
+   anni" e la galleria sotto restavano larghi solo quanto la galleria stessa
+   voleva essere (poche centinaia di px su schermi larghi), con enormi margini
+   bianchi ai lati invece di occupare la riga fino a 1200px. */
+.gb-container-e93b47eb {
+  width: 100%;
+}
+
 .entry-content .lp-hero .lp-hero-claim,
 .lp-hero-claim {
   position: absolute;
