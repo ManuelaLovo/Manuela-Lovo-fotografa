@@ -126,6 +126,38 @@
   margin: 0 auto;
 }
 
+/* lp: da mobile l'H1 sta sopra il grafico alto 42vh e subito sotto comincia l'H2, che
+   entrava già nella prima schermata. Una foto orizzontale in mezzo si prende quello che
+   resta della piega, così l'H2 si scopre scrollando. Solo da mobile: da desktop la piega
+   cade da sola più in basso. È la stessa foto dell'og:image della pagina, e torna più
+   sotto nella galleria. */
+.lp-hero-shot {
+  display: none;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .lp-hero-shot {
+    display: block;
+    /* stesso stacco che l'H1 ha sopra di sé, così il titolo respira fra il grafico e la foto */
+    margin-top: 20px;
+  }
+
+  /* l'altezza è quella che avanza fino alla piega: 100svh meno quello che sta sopra —
+     il logo in testata (~118px), il grafico dell'hero (largo quanto lo schermo, quindi
+     alto mezza larghezza), l'H1 su due righe, lo stacco qui sopra e quello della sezione
+     dopo. Il ritaglio è centrato e resta il minimo necessario a ogni altezza di schermo. */
+  .lp-hero-shot img {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 50vw - 208px);
+    height: calc(100svh - 50vw - 208px);
+    min-height: 200px;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
 /* lp: le due immagini di queste righe testo+foto (6.jpg, 7.jpg) non avevano nessun vincolo
    di larghezza nel CSS del tema — a schermo largo restavano ai 1000px nativi e
    schiacciavano la colonna di testo a una decina di px, facendo uscire il CTA sotto la
@@ -538,15 +570,24 @@ a.lp-nav-contact:focus {
   white-space: nowrap;
 }
 
+/* lp: il logo del sito è 123x90 — la dimensione naturale del file, che
+   `.site-logo img` sulle altre pagine non scala mai. Qui sta in una barra
+   che ha anche il CTA, quindi va più piccolo: 68px di altezza, cioè 93x68.
+   max-width serve da rete: sotto i ~325px lo spazio fra panino e CTA
+   scende sotto i 93px e il logo si stringe in proporzione invece di
+   sbordare. */
 .lp-nav-bar-logo {
   flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
 }
 
 .lp-nav-bar-logo img {
   display: block;
   width: auto;
   height: auto;
-  max-height: 64px;
+  max-width: 100%;
+  max-height: 68px;
 }
 
 .lp-nav-bar-action {
@@ -608,17 +649,19 @@ a.lp-nav-contact:focus {
 }
 
 /* lp: sotto i 991px entra il panino condiviso: i contatti se ne vanno lì
-   dentro e la barra gli lascia il posto con il padding, restando alta
-   abbastanza da contenerlo. Il bottone condiviso è una scatola da 75px
-   ancorata a 20px dal bordo, e le tre barrette, centrate lì dentro,
-   finivano addosso al logo: qui la scatola è più stretta e più a sinistra,
-   così le barrette cadono sui 20px del margine come il resto della pagina.
-   A destra il CTA arriva fino al margine: su questa pagina il selettore di
-   lingua non c'è, quindi l'angolo in alto a destra è tutto suo. */
+   dentro e la barra gli lascia il posto con il padding. Il bottone
+   condiviso è una scatola da 75px ancorata a 20px dal bordo, e le tre
+   barrette, centrate lì dentro, finivano addosso al logo: qui la scatola è
+   più stretta e più a sinistra, così le barrette cadono sui 20px del
+   margine come il resto della pagina.
+   Il logo prende tutto lo spazio che resta fra panino e CTA e si centra lì
+   dentro (flex: 1 sul box, immagine centrata), mentre il CTA torna a
+   larghezza naturale: a destra arriva fino al margine, perché su questa
+   pagina il selettore di lingua non c'è. */
 @media (max-width: 991px) {
   #masthead.lp-nav-bar {
     min-height: 90px;
-    padding-left: 95px !important;
+    padding-left: 60px !important;
   }
 
   button#responsive-menu-button {
@@ -629,14 +672,24 @@ a.lp-nav-contact:focus {
   .lp-nav-contacts {
     display: none;
   }
+
+  .lp-nav-bar {
+    gap: 8px;
+  }
+
+  .lp-nav-bar-logo {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .lp-nav-bar-action {
+    flex: 0 0 auto;
+  }
 }
 
 @media (max-width: 480px) {
-  #masthead.lp-nav-bar {
-    padding-left: 80px !important;
-  }
-
-  .lp-nav-bar-logo img {
-    max-height: 38px;
+  .lp-nav-bar-cta {
+    padding: 8px 12px;
+    font-size: 12px;
   }
 }
