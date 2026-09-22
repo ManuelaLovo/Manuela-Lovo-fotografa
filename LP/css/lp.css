@@ -90,10 +90,22 @@
 }
 
 /* Testata: l'immagine con il titolo H1 sopra, al posto della scritta che stava dentro la foto */
+/* lp: senza più header sopra, il grafico partiva subito sotto il bordo della
+   pagina — sotto i 991px ci arriva sotto la bandierina lingua, che qui è fissa
+   (css/language-switcher.css, condiviso: non si tocca lì) impilata in alto a
+   destra fino a un'altezza di ~96px. Un margine iniziale, solo su questa
+   pagina, tiene il grafico libero. */
 .lp-hero {
   position: relative;
   container-type: inline-size;
   margin: 0;
+  padding-top: 48px;
+}
+
+@media (max-width: 991px) {
+  .lp-hero {
+    padding-top: 100px;
+  }
 }
 
 /* lp: il logo in header ha max-height:172px !important dichiarato sul contenitore
@@ -189,6 +201,31 @@
      #6f694f pensato per la foto dell'anno scorso. */
   color: #8f6a34;
   text-transform: none;
+}
+
+/* lp: sotto i 600px il testo va da solo su 3 righe corte; Simone lo vuole su 2.
+   Il <br> in index.html resta nascosto da desktop (dove l'H1 sta su una riga
+   sola) e si accende solo qui. */
+.lp-hero-break {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .lp-hero-break {
+    display: inline;
+  }
+
+  /* alla larghezza e alla spaziatura di prima, dopo l'andata a capo forzata la
+     seconda riga ("Natale è tornato") restava comunque troppo larga e ripiegava
+     da sola su una terza riga: strette entrambe finché le due righe non ci
+     stanno davvero. Stessa specificità della regola di base (riga 158-159),
+     altrimenti "prima vince e questa non si applica mai. */
+  .entry-content .lp-hero .lp-hero-claim,
+  .lp-hero-claim {
+    font-size: clamp(20px, 6cqw, 26px);
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+  }
 }
 
 /* lp: "Dettagli del servizio fotografico" — da due colonne (elenco/bottone) generate dal
@@ -369,4 +406,29 @@ h2.gb-headline-ca36ea9a + .location-reel {
 .location-reel-video:focus-visible {
   outline: 2px solid #817561;
   outline-offset: 4px;
+}
+
+/* lp: footer senza il blocco "Esplora" (tolto dall'HTML, su richiesta di Simone —
+   niente link fuori dalla landing). css/contact-section.css è condiviso da tutto
+   il sito: non si tocca lì, altrimenti il footer delle altre pagine perde la sua
+   terza colonna. Qui, solo per questa pagina, la griglia passa da tre colonne a
+   due quando .contact-explore non c'è. */
+.contact-section-band .contact-section-grid:not(:has(.contact-explore)) {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 460px);
+  max-width: 900px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media only screen and (max-width: 1100px) {
+  .contact-section-band .contact-section-grid:not(:has(.contact-explore)) {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 400px);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .contact-section-band .contact-section-grid:not(:has(.contact-explore)) {
+    grid-template-columns: 1fr;
+    max-width: none;
+  }
 }
