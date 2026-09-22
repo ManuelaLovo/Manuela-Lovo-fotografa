@@ -1,0 +1,264 @@
+/* lp.css — solo le modifiche nostre alla landing. Il resto arriva dai fogli del tema. */
+
+
+
+/* lp: larghezza del contenuto — la landing occupa tutta la larghezza come nella
+   versione vecchia. Il contenitore stretto del sito vale per le altre pagine, non per questa. */
+
+#content.page-wrap > .container.content-wrapper {
+  width: 100%;
+  max-width: none;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#content.page-wrap > .container.content-wrapper > .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* lp: il testo evidenziato non deve prendere spazio attorno a sé */
+.entry-content mark,
+.entry-content .gb-highlight {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+/* lp: tipografia del contenuto — valori letti dalla pagina online
+   lovodesign.com/bianco-natale/, elemento per elemento. */
+
+.entry-content {
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: #303030;
+}
+
+.entry-content p,
+.entry-content li {
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  color: #303030;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.entry-content p.wp-block-paragraph {
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0 0 24px;
+}
+
+.entry-content p.gb-headline {
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 0 0 27px;
+}
+
+.entry-content li {
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.entry-content h4 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #565656;
+  margin: 0 0 24px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.entry-content h2.gb-headline-ca36ea9a { margin: 80px 0 50px; }
+.entry-content h2.gb-headline-5774b498 { margin: 40px 0 20px; }
+
+.entry-content .gb-button {
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Testata: l'immagine con il titolo H1 sopra, al posto della scritta che stava dentro la foto */
+.lp-hero {
+  position: relative;
+  container-type: inline-size;
+  margin: 0;
+}
+
+.lp-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* lp: le due immagini di queste righe testo+foto (6.jpg, 7.jpg) non avevano nessun vincolo
+   di larghezza nel CSS del tema — a schermo largo restavano ai 1000px nativi e
+   schiacciavano la colonna di testo a una decina di px, facendo uscire il CTA sotto la
+   foto. Stesso fix responsive del resto del sito. */
+
+.gb-image-6885321d,
+.gb-image-0de32cfc {
+  width: 100%;
+  height: auto;
+}
+
+.entry-content .lp-hero .lp-hero-claim,
+.lp-hero-claim {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 83.2%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: "Cormorant Garamond", "Noto Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: 3.5cqw;
+  line-height: 1;
+  letter-spacing: 0.38em;
+  text-indent: 0.38em;
+  color: #6f694f;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+/* lp: "Dettagli del servizio fotografico" — da due colonne (elenco/bottone) generate dal
+   builder a: titolo a tutta larghezza, due riquadri a bordo affiancati, bottone centrato
+   sotto. Si scavalca .gb-container-a04d9845 (definita in style-3552.css, caricato prima:
+   qui vince per ordine di cascata). Le due colonne si impilano da sole sotto agli ~630px
+   di .lp-details-boxes, via flex-wrap — nessun breakpoint aggiunto apposta. */
+
+.gb-container-a04d9845 {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  row-gap: 0;
+  column-gap: 0;
+  /* il genitore .gb-container-f2507519 centra senza stirare (align-items: center):
+     senza width:100% il contenitore si restringe al contenuto e i riquadri sotto
+     non hanno spazio per stare su una riga sola. */
+  width: 100%;
+}
+
+.lp-details-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.lp-details-box {
+  flex: 1 1 0%;
+  min-width: 280px;
+  box-sizing: border-box;
+  border: 1px solid #e0ddda;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 28px 32px;
+}
+
+.lp-details-box .wp-block-list {
+  margin: 0;
+}
+
+.lp-details-box li {
+  margin: 0 0 10px;
+}
+
+.lp-details-box li:last-child {
+  margin-bottom: 0;
+}
+
+.lp-details-cta {
+  margin-top: 28px;
+}
+
+/* lp: "Vuoi fare un regalo unico?" — titolo e primo paragrafo dentro un riquadro a bordo
+   di 840px centrato, i tre paragrafi restanti sotto, fuori dal riquadro, stessa larghezza.
+   Sotto gli 840px il riquadro va a piena larghezza da solo, per via del max-width fluido. */
+
+.lp-gift {
+  width: 100%;
+  max-width: 840px;
+  margin: 40px auto 0;
+  box-sizing: border-box;
+  border: 1px solid #e0ddda;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 36px 56px;
+  text-align: center;
+}
+
+.lp-gift h2.gb-headline-5774b498 {
+  margin: 0 0 20px;
+}
+
+.lp-gift p:last-child {
+  margin-bottom: 0;
+}
+
+.lp-gift-footer {
+  width: 100%;
+  max-width: 840px;
+  margin: 32px auto 0;
+  box-sizing: border-box;
+}
+
+.lp-gift-footer p {
+  margin: 0 0 20px;
+}
+
+.lp-gift-footer p:last-child {
+  margin-bottom: 0;
+}
+
+/* lp: numero cliccabile — testo invariato, niente stile "link" di default del browser */
+
+.lp-gift-footer a[href^="tel:"] {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* lp: CTA sotto "Non aspettare..." — stesso bottone delle altre due CTA, ma più piccolo
+   (padding e font ridotti) e senza il margine negativo pensato per fine sezione, che qui
+   lo faceva accavallare al paragrafo successivo. */
+
+.lp-gift-footer p:first-child {
+  margin-bottom: 8px;
+}
+
+.lp-gift-footer .gb-button-wrapper {
+  margin: 0 0 20px;
+}
+
+.lp-gift-footer .gb-button-wrapper a.gb-button-3a2422c5 {
+  padding: 12px 24px;
+  font-size: 14px;
+}
+
+/* lp: "posti sono limitati" — stesso riquadro a bordo di .lp-details-box, testo centrato.
+   "Bloccare subito..." resta fuori, sotto, come già era in pagina. */
+
+.lp-urgency-box {
+  border: 1px solid #e0ddda;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 16px 24px;
+  margin: -14px 0 12px;
+  text-align: center;
+}
+
+.lp-urgency-box p.gb-headline {
+  margin: 0;
+}

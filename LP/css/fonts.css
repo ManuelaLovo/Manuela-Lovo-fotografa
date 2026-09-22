@@ -1,0 +1,11 @@
+:root {
+--gp-font--bebas-neue: "Bebas Neue";
+}
+
+@font-face {
+	font-display: auto;
+	font-family: "Bebas Neue";
+	font-style: normal;
+	font-weight: 400;
+	src: url('https://www.lovodesign.com/wp-content/uploads/generatepress/fonts/bebas-neue/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2') format('woff2');
+}
