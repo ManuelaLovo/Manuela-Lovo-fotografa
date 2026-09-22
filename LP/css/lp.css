@@ -99,13 +99,6 @@
   position: relative;
   container-type: inline-size;
   margin: 0;
-  padding-top: 48px;
-}
-
-@media (max-width: 991px) {
-  .lp-hero {
-    padding-top: 100px;
-  }
 }
 
 /* lp: il logo in header ha max-height:172px !important dichiarato sul contenitore
@@ -249,12 +242,19 @@
 .lp-details-boxes {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 30px;
 }
 
+/* lp: erano flex:1 1 0% — metà a testa, sempre uguali indipendentemente dal
+   testo. Il riquadro del prezzo (tre righe corte) restava con mezzo riquadro
+   bianco a destra del testo, segnalato da Simone. A misura del contenuto
+   invece: ognuno prende solo lo spazio che gli serve davvero. */
 .lp-details-box {
-  flex: 1 1 0%;
+  flex: 0 1 auto;
+  width: fit-content;
   min-width: 280px;
+  max-width: 100%;
   box-sizing: border-box;
   border: 1px solid #e0ddda;
   border-radius: 10px;
@@ -430,5 +430,102 @@ h2.gb-headline-ca36ea9a + .location-reel {
   .contact-section-band .contact-section-grid:not(:has(.contact-explore)) {
     grid-template-columns: 1fr;
     max-width: none;
+  }
+}
+
+/* lp: tre blocchi generati dal page builder (righe "Il Natale si avvicina" e
+   "Prenotando subito", box "Dettagli del servizio") hanno tutti lo stesso
+   max-width:1200px fisso (style-3552.css, generato — non si tocca lì). Su
+   schermi larghi lascia un bordo bianco vistoso ai lati e, nei due box
+   affiancati, metà box vuota perché ogni box è metà di 1200px invece che
+   della larghezza vera disponibile. Stesso valore usato già dal footer su
+   questa pagina (900px + le due colonne, contact-section.css). */
+.gb-container-f67b0d2e,
+.gb-container-84d1e279,
+.gb-container-a04d9845 {
+  max-width: 1400px;
+}
+
+/* lp: navbar nuova, solo per la landing — logo a sinistra (senza link alla
+   home, serve solo a far riconoscere che è Manuela Lovo) e CTA a destra,
+   niente menu. `.site-header` di css/collezione-natale.css (condiviso, non
+   si tocca) lo rende fixed o absolute a seconda di quando lo script tocca
+   la classe "fixed": comportamento non deterministico, ha lasciato un
+   vuoto enorme sopra l'hero in un caricamento su due. Riportato a un
+   blocco normale, in flusso, sempre uguale: position qui vince perché più
+   specifica (due classi) della singola `.site-header` condivisa. */
+#masthead.lp-nav-bar {
+  position: static;
+}
+
+.lp-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #ffffff;
+}
+
+.lp-nav-bar-logo {
+  margin-left: 20px;
+}
+
+.lp-nav-bar-logo img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 50px;
+}
+
+/* lp: .gb-button-3a2422c5 (le altre "PRENOTA ORA!" in pagina) prende colore
+   e forma da una regola scoped a .gb-button-wrapper-03593cf0, che qui non
+   c'è: risultava trasparente, senza radius, testo grigio invece che il
+   bottone arancione delle altre. Rifatto esplicito con gli stessi valori
+   (sfondo #a95401, testo bianco, radius 10px — letti dal bottone vero con
+   getComputedStyle), compattato per stare in una barra invece che a piena
+   sezione. */
+.lp-nav-bar-cta {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  margin-right: 20px;
+  padding: 10px 20px;
+  font-size: 13px;
+  line-height: normal;
+  background-color: #a95401;
+  color: #ffffff;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.lp-nav-bar-cta:hover,
+.lp-nav-bar-cta:focus {
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+/* lp: sotto i 991px la bandierina lingua (css/language-switcher.css,
+   condiviso) passa in alto a destra, impilata, 68px di colonna — lo stesso
+   posto dove va il CTA. Il CTA le lascia libere. */
+@media (max-width: 991px) {
+  .lp-nav-bar-cta {
+    margin-right: 84px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lp-nav-bar-logo {
+    margin-left: 12px;
+  }
+
+  .lp-nav-bar-logo img {
+    max-height: 38px;
+  }
+
+  .lp-nav-bar-cta {
+    margin-right: 84px;
+    padding: 8px 14px;
   }
 }
