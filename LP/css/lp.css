@@ -108,10 +108,17 @@
   max-height: 172px;
 }
 
+/* lp: il grafico "Foresta Incantata 2026" a piena larghezza (1774x887) sfondava la
+   piega su schermi normali. Stesso principio del video verticale delle location
+   (location-page.css): il limite è sull'altezza, non sulla larghezza, così il
+   grafico si restringe finché non ci sta, centrato. */
 .lp-hero img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
+  max-height: 42vh;
+  margin: 0 auto;
 }
 
 /* lp: le due immagini di queste righe testo+foto (6.jpg, 7.jpg) non avevano nessun vincolo
@@ -157,30 +164,30 @@
 
 .entry-content .lp-hero .lp-hero-claim,
 .lp-hero-claim {
-  position: absolute;
-  left: 0;
-  right: 0;
-  /* spostato più in basso (era 83.2%) per staccarlo dalla grafica sopra
-     (corona, "Bianco Natale 2026", riga "2026" — tutta dentro la foto). */
-  top: 90%;
-  transform: translateY(-50%);
-  margin: 0;
+  /* era assoluto, ancorato al 90% dell'altezza della foto: pensato per stare
+     sotto la grafica che l'anno scorso era incorporata nella foto stessa
+     (corona, "Bianco Natale 2026", riga "2026"). Il grafico di quest'anno
+     (foresta.png) è un PNG trasparente il cui testo ornato occupa quasi tutta
+     l'altezza dell'immagine, senza lo spazio vuoto sotto: l'H1 torna in flusso
+     normale, sempre sotto il grafico qualunque sia la sua altezza resa. */
+  margin: 20px 0 0;
   padding: 0 20px;
   text-align: center;
   font-family: "Cormorant Garamond", "Noto Serif", Georgia, serif;
   /* era 400, restava sottile e poco leggibile con una letter-spacing così ampia.
      600 è il peso più pesante caricato per questo font (aggiunto in index.html). */
   font-weight: 600;
-  /* era 3.5cqw senza minimo: a 375px di larghezza rendeva un H1 da 12px, più
-     piccolo del corpo del testo. Il primo minimo (15px) restava comunque troppo
-     sottile per leggersi bene: alzato a 18px, vicino al peso che il testo ha già
-     da desktop (22px, il tetto del clamp). Tolto anche il nowrap, che imponeva la
-     riga unica indipendentemente dallo spazio disponibile. */
-  font-size: clamp(18px, 3.5cqw, 22px);
+  /* il grafico sopra ora è piccolo (max-height:42vh): l'H1 a 18-22px, pensato per
+     stare sopra la foto grande dell'anno scorso, spariva. Riportato a una taglia
+     con più presenza, stessa proporzione fra minimo e tetto di prima. */
+  font-size: clamp(26px, 5cqw, 34px);
   line-height: 1.3;
   letter-spacing: 0.38em;
   text-indent: 0.38em;
-  color: #6f694f;
+  /* campionato dai pixel opachi di foresta.png (System.Drawing, media RGB
+     143,106,52): oro/bronzo antico dello stesso logotipo, al posto del taupe
+     #6f694f pensato per la foto dell'anno scorso. */
+  color: #8f6a34;
   text-transform: none;
 }
 
@@ -311,4 +318,55 @@
 
 .lp-urgency-box p.gb-headline {
   margin: 0;
+}
+
+/* lp: video verticale "dietro le quinte" prima della galleria "Alcuni scatti degli
+   scorsi anni" — stesse due regole di css/location-page.css (righe 411-414 e 444-454),
+   dove il reel delle pagine location ha lo stesso trattamento. Copiate qui invece di
+   caricare l'intero foglio, che porta con sé anche .location-nearby e le altre classi
+   delle pagine location, non pertinenti su questa landing. Niente H2 qui: su questa
+   pagina il video va senza titolo, su richiesta di Simone. */
+.location-reel {
+  padding: clamp(36px, 5vw, 56px) 0;
+  text-align: center;
+}
+
+/* lp: fra l'H2 "Alcuni scatti degli scorsi anni" (margin-bottom:50px, riga 80 di
+   questo file) e il video ci sono 86px di vuoto (50 + i 36 di padding-top del
+   reel) — troppi, segnalato da Simone. Si stringe solo qui, dove il video segue
+   subito l'H2: il margine dell'H2 nelle altre eventuali posizioni non cambia. */
+.entry-content h2.gb-headline-ca36ea9a:has(+ .location-reel) {
+  margin-bottom: 24px;
+}
+
+h2.gb-headline-ca36ea9a + .location-reel {
+  padding-top: 16px;
+}
+
+/* lp: le due gallerie (le foto nuove sopra, "Alcuni scatti degli scorsi anni" sotto)
+   non avevano nessuno stacco fra l'ultima riga della prima e la prima riga della
+   seconda. Stesso gap che la galleria usa già fra le sue righe (8px, il gap di
+   .wp-block-gallery.is-layout-flex), non uno stacco nuovo: deve leggersi come
+   un'unica galleria continua. */
+.wp-block-gallery + .wp-block-gallery {
+  margin-top: 8px;
+}
+
+/* I reel verticali sono 720x1280: il limite è sull'altezza (max-height) e non sulla
+   larghezza, così il verticale sta sempre dentro la finestra. */
+.location-reel-video {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 70vh;
+  margin: 0 auto;
+  border: 1px solid rgba(158, 147, 127, 0.4);
+  box-shadow: 0 18px 48px rgba(28, 28, 28, 0.08);
+  background: #1c1c1c;
+}
+
+.location-reel-video:focus-visible {
+  outline: 2px solid #817561;
+  outline-offset: 4px;
 }
