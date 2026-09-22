@@ -80,6 +80,24 @@
 .entry-content h2.gb-headline-ca36ea9a { margin: 80px 0 50px; }
 .entry-content h2.gb-headline-5774b498 { margin: 40px 0 20px; }
 
+/* lp: nel primo H2, da mobile, "servizio fotografico" si spezzava a metà e il nome
+   del servizio restava attaccato alla riga sopra. Le due parole restano insieme e
+   il nome fra virgolette va a capo da solo. Il <br> è nascosto da desktop, dove la
+   riga è larga e non serve. */
+.lp-h2-break {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .lp-h2-break {
+    display: inline;
+  }
+
+  .lp-h2-nowrap {
+    white-space: nowrap;
+  }
+}
+
 .entry-content .gb-button {
   font-family: "Nunito", sans-serif;
   font-size: 16px;
