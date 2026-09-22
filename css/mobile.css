@@ -46,8 +46,12 @@
      bianco, sotto i 780px il margine non c'è più e finisce sopra le
      fotografie e sopra l'elenco delle location. Gli stessi due link stanno
      nel footer di ogni pagina: nascondendola non si perde nessun
-     collegamento. L'!important batte lo stile inline dell'elemento. */
-  #social-left {
+     collegamento. L'!important batte lo stile inline dell'elemento — ma
+     contact-section.css dichiara lo stesso elemento come #social-left.social,
+     più specifico (ID+classe contro solo ID): tra due !important vince la
+     specificità più alta, quindi questa regola non è mai stata applicata.
+     Serve lo stesso selettore composto per vincere davvero. */
+  #social-left.social {
     display: none !important;
   }
 }
